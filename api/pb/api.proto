@@ -1,0 +1,19 @@
+syntax = "proto3";
+package pb;
+
+
+message SimpleMessage {
+    string value = 1;
+}
+
+message BinaryMessage {
+    bytes data = 1;
+}
+
+service SpacemeshService {
+    rpc BroadcastPoet(BinaryMessage) returns (SimpleMessage) {
+    }
+
+    rpc GetProof(SimpleMessage) returns (BinaryMessage) {
+    }
+}
