@@ -1,4 +1,4 @@
-module mockNode
+module github.com/spacemeshos/go-spacemesh-mock
 
 go 1.13
 
