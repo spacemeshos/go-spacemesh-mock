@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"mockNode/api/pb"
-
+	"github.com/spacemeshos/go-spacemesh-mock/api/pb"
 	"github.com/spacemeshos/smutil/log"
+
 	"google.golang.org/grpc"
 )
 

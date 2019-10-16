@@ -7,11 +7,11 @@ import (
 	"net"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"runtime"
 	"time"
 
-	"mockNode/api/pb"
-	"path/filepath"
+	"github.com/spacemeshos/go-spacemesh-mock/api/pb"
 
 	"google.golang.org/grpc"
 )

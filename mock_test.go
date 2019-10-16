@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"mockNode/api/pb"
-	integration "mockNode/integration/harness"
+	"github.com/spacemeshos/go-spacemesh-mock/api/pb"
+	integration "github.com/spacemeshos/go-spacemesh-mock/integration/harness"
 
 	"github.com/spacemeshos/smutil/log"
 	"github.com/stretchr/testify/require"

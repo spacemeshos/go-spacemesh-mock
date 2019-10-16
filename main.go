@@ -6,12 +6,12 @@ import (
 	"net"
 	"os"
 
-	"mockNode/api"
-	"mockNode/api/pb"
-	"mockNode/service"
-	"mockNode/utils"
-
+	"github.com/spacemeshos/go-spacemesh-mock/api"
+	"github.com/spacemeshos/go-spacemesh-mock/api/pb"
+	"github.com/spacemeshos/go-spacemesh-mock/service"
+	"github.com/spacemeshos/go-spacemesh-mock/utils"
 	"github.com/spacemeshos/smutil/log"
+
 	"google.golang.org/grpc"
 )
 
