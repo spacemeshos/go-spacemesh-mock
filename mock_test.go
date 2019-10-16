@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/spacemeshos/go-spacemesh-mock/api/pb"
-	integration "github.com/spacemeshos/go-spacemesh-mock/integration/harness"
+	integration "github.com/spacemeshos/go-spacemesh-mock/integration"
 
 	"github.com/spacemeshos/smutil/log"
 	"github.com/stretchr/testify/require"
