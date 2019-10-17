@@ -11,7 +11,7 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/spacemeshos/go-spacemesh-mock/api/pb"
+	"github.com/spacemeshos/go-spacemesh-mock/api/nmpb"
 
 	"google.golang.org/grpc"
 )
@@ -22,7 +22,7 @@ import (
 type Harness struct {
 	server *server
 	conn   *grpc.ClientConn
-	pb.SpacemeshServiceClient
+	nmpb.SpacemeshServiceClient
 }
 
 // NewHarness creates and initializes a new instance of Harness.
@@ -55,9 +55,9 @@ func NewHarness(cfg *ServerConfig) (*Harness, error) {
 	}
 
 	h := &Harness{
-		server:     			server,
-		conn:       			conn,
-		SpacemeshServiceClient: pb.NewSpacemeshServiceClient(conn),
+		server:                 server,
+		conn:                   conn,
+		SpacemeshServiceClient: nmpb.NewSpacemeshServiceClient(conn),
 	}
 
 	return h, nil

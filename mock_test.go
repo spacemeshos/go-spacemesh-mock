@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/spacemeshos/go-spacemesh-mock/api/pb"
+	"github.com/spacemeshos/go-spacemesh-mock/api/nmpb"
 	integration "github.com/spacemeshos/go-spacemesh-mock/integration"
 
 	"github.com/spacemeshos/smutil/log"
@@ -93,7 +93,7 @@ func testMock(h *integration.Harness, assert *require.Assertions, ctx context.Co
 
 // broadcast poets' proof and returns result msg type of a string and error.
 func broadcast(h *integration.Harness, ctx context.Context, proof []byte) (string, error) {
-	msg, err := h.BroadcastPoet(ctx, &pb.BinaryMessage{Data: proof})
+	msg, err := h.BroadcastPoet(ctx, &nmpb.BinaryMessage{Data: proof})
 	if err != nil {
 		log.Error("could not broadcast proof:", err)
 		return "", err
@@ -104,7 +104,7 @@ func broadcast(h *integration.Harness, ctx context.Context, proof []byte) (strin
 
 // get proof by round index, return byte stream of the proof and error.
 func getProof(h *integration.Harness, ctx context.Context, roundNum int) ([]byte, error) {
-	binMsg, err := h.GetProof(ctx, &pb.SimpleMessage{Value: strconv.Itoa(roundNum)})
+	binMsg, err := h.GetProof(ctx, &nmpb.SimpleMessage{Value: strconv.Itoa(roundNum)})
 	if err != nil {
 		log.Error("could not retrieve data: %v", err)
 		return nil, err

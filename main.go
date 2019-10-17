@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/spacemeshos/go-spacemesh-mock/api"
-	"github.com/spacemeshos/go-spacemesh-mock/api/pb"
+	"github.com/spacemeshos/go-spacemesh-mock/api/nmpb"
 	"github.com/spacemeshos/go-spacemesh-mock/service"
 	"github.com/spacemeshos/go-spacemesh-mock/utils"
 	"github.com/spacemeshos/smutil/log"
@@ -68,7 +68,7 @@ func main() {
 		Network: &service.NetworkMock{},
 	}
 
-	pb.RegisterSpacemeshServiceServer(ps.Server, ps)
+	nmpb.RegisterSpacemeshServiceServer(ps.Server, ps)
 
 	fmt.Println("grpc API listening on", rpcListen)
 	if err := ps.Server.Serve(lis); err != nil {
