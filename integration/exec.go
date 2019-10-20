@@ -6,6 +6,8 @@ import (
 	"path/filepath"
 	"runtime"
 	"sync"
+
+	"github.com/spacemeshos/go-spacemesh-mock/utils"
 )
 
 var (
@@ -23,7 +25,7 @@ var (
 // To ensure the code tests against the most up-to-date version, this method
 // compiles a mock node server the first time it is called. After that, the
 // generated binary is used for subsequent requests.
-func nodeExecutablePath(baseDir string) (string, error) {
+func nodeExecutablePath(sourceCodePath string, execBaseDir string) (string, error) {
 	compileMtx.Lock()
 	defer compileMtx.Unlock()
 
@@ -33,16 +35,24 @@ func nodeExecutablePath(baseDir string) (string, error) {
 	}
 
 	// Build mock node and output an executable in basedir path.
-	outputPath := filepath.Join(baseDir, "mocknode")
+	outputPath := filepath.Join(execBaseDir, "mocknode")
 	if runtime.GOOS == "windows" {
 		outputPath += ".exe"
 	}
 
-	// TODO  add node repo
-	// TODO "github.com/spacemeshos/poet"
-	cmd := exec.Command("go", "build", "-i", "-o", outputPath)
+	shPath, err := utils.FindPath("sh")
+	if err != nil {
+		return "", fmt.Errorf("could not find sh: %v", err)
+	}
+	// set command to execute in the same shell.
+	// go-spacemesh-mock source code may be outside the working directory
+	moveToMNFolder := fmt.Sprintf("cd %v;", sourceCodePath)
+	// TODO "github.com/spacemeshos/go-spacemesh-mock"
+	compile := fmt.Sprintf("go build -i -o %v;", outputPath)
 
-	err := cmd.Run()
+	cmd := exec.Command(shPath, "-c", moveToMNFolder + compile)
+
+	err = cmd.Run()
 	if err != nil {
 		return "", fmt.Errorf("failed to build mock node: %v", err)
 	}

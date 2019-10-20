@@ -52,14 +52,14 @@ func main() {
 	rpcListen, err := getListenAddress(os.Args)
 	if err != nil {
 		fmt.Println("an has occurred error while parsing listening address", err)
-		return
+		panic(fmt.Sprintf("an has occurred error while parsing listening address, err: %v", err))
 	}
 
 	lis, err := net.Listen("tcp", rpcListen)
 	if err != nil {
 		fmt.Println("Failed listening on", rpcListen, "\nerr:", err)
 		_ = fmt.Errorf("failed to Dial. err: %v", err)
-		return
+		panic(fmt.Sprintf("Failed listening on %v,\nerr:%v", rpcListen, err))
 	}
 	defer lis.Close()
 
@@ -73,5 +73,6 @@ func main() {
 	fmt.Println("grpc API listening on", rpcListen)
 	if err := ps.Server.Serve(lis); err != nil {
 		log.Error("failed to serve: %s", err)
+		panic(fmt.Sprintf("failed to serve: %v", err))
 	}
 }

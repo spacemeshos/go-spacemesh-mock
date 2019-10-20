@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/spacemeshos/go-spacemesh-mock/api/nmpb"
-	integration "github.com/spacemeshos/go-spacemesh-mock/integration"
+	"github.com/spacemeshos/go-spacemesh-mock/integration"
 
 	"github.com/spacemeshos/smutil/log"
 	"github.com/stretchr/testify/require"
@@ -47,7 +47,8 @@ func newHarness(req *require.Assertions, cfg *integration.ServerConfig) * integr
 func TestHarness(t *testing.T) {
 	assert := require.New(t)
 
-	cfg, err := integration.DefaultConfig()
+	srcCodePath := "."
+	cfg, err := integration.DefaultConfig(srcCodePath)
 	assert.NoError(err)
 
 	h := newHarness(assert, cfg)

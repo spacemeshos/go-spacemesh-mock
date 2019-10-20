@@ -17,13 +17,13 @@ type ServerConfig struct {
 }
 
 // DefaultConfig returns a newConfig with all default values.
-func DefaultConfig() (*ServerConfig, error) {
+func DefaultConfig(srcCodePath string) (*ServerConfig, error) {
 	baseDir, err := baseDir()
 	if err != nil {
 		return nil, err
 	}
 
-	nodePath, err := nodeExecutablePath(baseDir)
+	nodePath, err := nodeExecutablePath(srcCodePath, baseDir)
 	if err != nil {
 		return nil, err
 	}

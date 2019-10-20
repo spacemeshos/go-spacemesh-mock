@@ -43,6 +43,7 @@ func NewHarness(cfg *ServerConfig) (*Harness, error) {
 	// Spawn a new mockNode server process.
 	fmt.Println("Mock node server start listening on:", server.cfg.rpcListen + "\n")
 	if err := server.start(); err != nil {
+		fmt.Println("Mock node ERROR listening on:", server.cfg.rpcListen + "\n")
 		return nil, err
 	}
 

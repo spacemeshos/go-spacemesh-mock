@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"bytes"
+	"os/exec"
 	"regexp"
 )
 
@@ -25,5 +27,17 @@ func ValidateFullAddress(address string) bool {
 	}
 
 	return false
+}
+
+func FindPath(process string) (string, error) {
+	cmd := exec.Command("which",  process)
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	err := cmd.Run()
+	if err != nil {
+		return "", err
+	}
+
+	return out.String(), nil
 }
 
