@@ -37,17 +37,12 @@ func nodeExecutablePath(sourceCodePath string, execBaseDir string) (string, erro
 	if runtime.GOOS == "windows" {
 		outputPath += ".exe"
 	}
-	
-	// set command to execute in the same shell.
-	// go-spacemesh-mock source code may be outside the working directory
-	moveToMNFolder := fmt.Sprintf("cd %v;", sourceCodePath)
-	// TODO "github.com/spacemeshos/go-spacemesh-mock"
-	compile := fmt.Sprintf("go build -i -o %v;", outputPath)
-	cmd := exec.Command("/bin/sh", "-c", moveToMNFolder + compile)
 
+	// run compilation script to overcome the path issue
+	cmd := exec.Command("/bin/sh", "./compile.sh", outputPath)
 	err := cmd.Run()
 	if err != nil {
-		return "", fmt.Errorf("failed to build mock node: %v", err)
+		return "", fmt.Errorf("error running compile script: %v", err)
 	}
 
 	// Save executable path so future calls do not recompile.
